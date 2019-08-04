@@ -1,22 +1,23 @@
 import React, { useState } from "react";
-import { Grid, Row, Col, Panel, ButtonGroup, Button } from "react-bootstrap";
+import { ButtonGroup, Button } from "react-bootstrap";
 import ReactDOM from "react-dom";
 
 import "./styles.css";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [estado, setEstado] = useState("ENTRADA");
 
-  const [max, setMax] = useState(300);
+  const [max, setMax] = useState(0);
   const [min, setMin] = useState(0);
-  const [palpite, setPalpite] = useState(parseInt((300 - 0) / 2));
-  const [tentativas, setTentativas] = useState(1);
+  const [palpite, setPalpite] = useState(0);
+  const [tentativas, setTentativas] = useState(0);
 
   const iniciar = () => {
     setEstado("RODANDO");
     setMin(0);
     setMax(300);
-    setPalpite(parseInt((300 - 0) / 2));
+    setPalpite(parseInt(Math.random() * (300 - 0)));
     setTentativas(1);
   };
 
@@ -27,21 +28,21 @@ function App() {
   const eMaior = () => {
     setTentativas(tentativas + 1);
     setMin(palpite);
-    const i = parseInt((max - palpite) / 2) + palpite;
+    const i = parseInt(Math.random() * (max - palpite)) + palpite;
     setPalpite(i);
   };
 
   const eMenor = () => {
     setTentativas(tentativas + 1);
     setMax(palpite);
-    const i = parseInt((palpite - min) / 2) + min;
+    const i = parseInt(Math.random() * (palpite - min)) + min;
     setPalpite(i);
   };
 
   if (estado === "ENTRADA") {
     return (
       <div className="App">
-        <Button bsStyle={"primary"} onClick={iniciar}>
+        <Button variant="primary" onClick={iniciar}>
           Começar
         </Button>
       </div>
@@ -55,14 +56,12 @@ function App() {
         <p>
           Tentei {tentativas}x para acertar seu # {palpite}!
         </p>
-        <Button bsStyle={"primary"} onClick={iniciar}>
+        <Button variant="primary" onClick={iniciar}>
           De novoooooooo
         </Button>
       </div>
     );
   }
-
-  const novoPalpite = () => {};
 
   return (
     <div className="App">
@@ -77,13 +76,13 @@ function App() {
         Min: {min} | Max: {max} | Tentativas: {tentativas}
       </p>
       <ButtonGroup>
-        <Button bsStyle={"secondary"} onClick={eMenor}>
+        <Button variant="secondary" onClick={eMenor}>
           Menor
         </Button>
-        <Button bsStyle={"primary"} onClick={acertou}>
+        <Button variant="primary" onClick={acertou}>
           Acertou!
         </Button>
-        <Button bsStyle={"secondary"} onClick={eMaior}>
+        <Button variant="secondary" onClick={eMaior}>
           Maior
         </Button>
       </ButtonGroup>

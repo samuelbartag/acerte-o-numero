@@ -5,6 +5,7 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
+    "bootstrap": "3.3.7",
     "less": "3.9.0",
     "react": "16.8.6",
     "react-bootstrap": "0.32.4",
